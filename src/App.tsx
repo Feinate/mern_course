@@ -3,9 +3,12 @@ import { Note as NoteModel } from "./models/note";
 import Note from "./components/Note";
 import * as NotesApi from "./network/notes_api"
 import RoundedIconButton from "./components/RoundedIconButton";
+import AddNoteDialog from "./components/AddNoteDialog";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
+
+  const [showAddNoteDialog, setShowAddNoteDialog] = useState(true);
 
   useEffect(() => {
     async function loadNotes() {
@@ -21,7 +24,7 @@ function App() {
   }, []); // Recomposotion key lol like jetpack compose
 
   return (
-    <div className="App">
+    <div className="w-full">
       <header className="items-center flex flex-row h-16 px-4 bg-slate-700">
         <RoundedIconButton className="flex justify-center items-center ml-auto h-10 w-10 bg-slate-300 rounded-full"/>
       </header>
@@ -32,6 +35,9 @@ function App() {
           ))
         }
       </section>
+      { showAddNoteDialog &&
+        <AddNoteDialog/>
+      }
     </div>
   );
 }
